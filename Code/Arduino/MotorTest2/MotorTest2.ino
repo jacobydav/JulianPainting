@@ -17,21 +17,21 @@ void setup()
   motorPWMPinArray[0]=9; pinMode(motorPWMPinArray[0],OUTPUT);  //The pin on the Arduino that turns on the transistor that turns on the motor.
   motorPWMPinArray[1]=11; pinMode(motorPWMPinArray[1],OUTPUT);
   motorPWMPinArray[2]=2; pinMode(motorPWMPinArray[2],OUTPUT);
-  motorLEDPinArray[0]=10; pinMode(motorLEDPinArray[0],OUTPUT);
+  motorLEDPinArray[0]=3; pinMode(motorLEDPinArray[0],OUTPUT);
   motorLEDPinArray[1]=12; pinMode(motorLEDPinArray[1],OUTPUT);
-  motorLEDPinArray[2]=3; pinMode(motorLEDPinArray[2],OUTPUT);
+  motorLEDPinArray[2]=10; pinMode(motorLEDPinArray[2],OUTPUT);
   motorSensorPinArray[0]=0;  //Analog in A0
   motorSensorPinArray[1]=1;  //Analog in A1
   motorSensorPinArray[2]=2;  //Analog in A2
-  psThresh[0] = 200;//200;  //Motor 1. Threshold for when the light hits the photosensor
-  psThresh[1] = 300;  //Motor 2
-  psThresh[2] = 200;  //Motor 3
-  homeHoleMinIntervalArray_ms[0] = 700; //Motor 1. If we see a hole for this amount of time, call it home.
-  homeHoleMinIntervalArray_ms[1] = 700; //Motor 2
-  homeHoleMinIntervalArray_ms[2] = 700; //Motor 3
-  posHoleMinIntervalArray_ms[0] = 75;  //Motor 1
-  posHoleMinIntervalArray_ms[1] = 75;  //Motor 2
-  posHoleMinIntervalArray_ms[2] = 75;  //Motor 3
+  psThresh[0] = 120;//200;  //Motor 1. Threshold for when the light hits the photosensor
+  psThresh[1] = 200;  //Motor 2
+  psThresh[2] = 120;  //Motor 3
+  homeHoleMinIntervalArray_ms[0] = 600; //Motor 1. If we see a hole for this amount of time, call it home.
+  homeHoleMinIntervalArray_ms[1] = 575; //Motor 2
+  homeHoleMinIntervalArray_ms[2] = 600; //Motor 3
+  posHoleMinIntervalArray_ms[0] = 50;  //Motor 1
+  posHoleMinIntervalArray_ms[1] = 50;  //Motor 2
+  posHoleMinIntervalArray_ms[2] = 50;  //Motor 3
   Serial.begin(9600);
   while (! Serial);
   Serial.println("Select motor: (1,2, or 3)");
@@ -145,8 +145,8 @@ void loop()
         {
           //read the photosensor value
           int psIn = analogRead(motorSensorPinArray[selectedMotorIndex]);
-          //Serial.print("Analog value is ");
-          //Serial.println(psIn);                    
+          Serial.print("Analog value is ");
+          Serial.println(psIn);                    
           if(psIn>=psThresh[selectedMotorIndex] && isOverHole==false)  //A new hole is found
           {
             Serial.println("Hole started");   
